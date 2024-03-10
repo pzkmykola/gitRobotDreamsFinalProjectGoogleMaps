@@ -35,16 +35,16 @@ class SplashFragment : Fragment() {
         val googleSignInClient =
             GoogleSignIn.getClient(requireContext(), googleSignInInOptions)
         val account = GoogleSignIn.getLastSignedInAccount(requireContext())
-        val activity = requireActivity() as OnAuthLaunch
-        if(account == null) {
-            showSignInButton()
-        } else {
-            animatorSet.cancel()
-            activity.showListFragment()
-        }
-        signInButton?.setOnClickListener {
-            activity.launch(googleSignInClient.signInIntent)
-        }
+//        val activity = requireActivity() as OnAuthLaunch
+//        if(account == null) {
+//            showSignInButton()
+//        } else {
+//            animatorSet.cancel()
+//            activity.showListFragment()
+//        }
+//        signInButton?.setOnClickListener {
+//            activity.launch(googleSignInClient.signInIntent)
+//        }
     }
     private fun showSignInButton(){
         signInButton?.visibility = View.VISIBLE

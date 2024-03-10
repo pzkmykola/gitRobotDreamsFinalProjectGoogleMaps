@@ -39,8 +39,8 @@ class HomeListFragment: Fragment() {
         target  =  database.reference
             .child(account?.id ?: "unknown_account").child("clients")
         fab.setOnClickListener {
-            val activity = requireActivity() as OnAddClickListener
-            activity.onFabClick()
+//            val activity = requireActivity() as OnAddClickListener
+//            activity.onFabClick()
         }
 
         target?.addValueEventListener(object : ValueEventListener {
