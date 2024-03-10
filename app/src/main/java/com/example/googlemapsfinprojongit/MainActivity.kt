@@ -13,7 +13,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
+//AIzaSyDjcH6vZclJa3850zXUtVKt1tnK3fETaMM
 //, OnAuthLaunch, OnAddClickListener
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,18 +24,18 @@ class MainActivity : AppCompatActivity() {
             val coordinates_Lviv = LatLng(49.842957, 24.031111)
             map.addMarker(MarkerOptions().position(coordinates_Lviv).title("My Position"))
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates_Lviv, 8F))
-//            CoroutineScope(Dispatchers.IO).launch {
-//                val result = client.create(ApiInterface::class.java).getSimpleRoute()
-//                if (result.isSuccessful){
-//                    withContext(Dispatchers.Main) {
-//                        result.body()?.let {
-//                            val polylinePoints = it.routes[0].overviewPolyline.points
-//                            val decodedPath = PolyUtil.decode(polylinePoints)
-//                            map.addPolyline(PolylineOptions().addAll(decodedPath))
-//                        }
-//                    }
-//                }
-//            }
+            CoroutineScope(Dispatchers.IO).launch {
+                val result = client.create(ApiInterface::class.java).getSimpleRoute()
+                if (result.isSuccessful){
+                    withContext(Dispatchers.Main) {
+                        result.body()?.let {
+                            val polylinePoints = it.routes[0].overviewPolyline.points
+                            val decodedPath = PolyUtil.decode(polylinePoints)
+                            map.addPolyline(PolylineOptions().addAll(decodedPath))
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -13,6 +13,6 @@ object Client {
 }
 
 interface ApiInterface {
-    @GET("/maps/api/directions/json?&origin=49.842957,24.031111&destination=49.553516,25.594767&key=AIzaSyApJ3vMW5okYnyCamKNzwXmiQ9juyXbeUA")
+    @GET("/maps/api/directions/json?&origin=49.842957,24.031111&destination=49.553516,25.594767&key=AIzaSyBM36Lb3FAJumpAbWm1PBG50RA-VTwpWHk")
     suspend fun getSimpleRoute(): retrofit2.Response<DirectionsResponse>
 }
