@@ -41,9 +41,6 @@ class HomeListFragment: Fragment() {
         fab.setOnClickListener {
             val activity = requireActivity() as OnAddClickListener
             activity.onFabClick()
-//            parentFragmentManager.beginTransaction()
-//                .replace(R.id.container, AddClientFragment())
-//                .commit()
         }
 
         target?.addValueEventListener(object : ValueEventListener {
