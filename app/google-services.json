@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "585515021568",
+    "firebase_url": "https://mapsfinprojongit-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "mapsfinprojongit",
+    "storage_bucket": "mapsfinprojongit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585515021568:android:0747e97788d25e6269efe5",
+        "android_client_info": {
+          "package_name": "com.example.googlemapsfinprojongit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "585515021568-76e38dhhsg29o5e78vces537e4hpeinj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.googlemapsfinprojongit",
+            "certificate_hash": "0de19755cdb7aee260d2ad35aaf5bd2ca57fad4c"
+          }
+        },
+        {
+          "client_id": "585515021568-sd3d0tsbttodv00rse73idturasp92sq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3xRzyXd-SBSJ6oS_jZpPu7fSXLBED9qM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585515021568-sd3d0tsbttodv00rse73idturasp92sq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
