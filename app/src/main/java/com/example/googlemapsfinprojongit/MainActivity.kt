@@ -21,9 +21,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val supportMapFragment = supportFragmentManager.findFragmentById(R.id.container) as SupportMapFragment
         supportMapFragment.getMapAsync { map ->
-            val coordinates_Lviv = LatLng(49.842957, 24.031111)
-            map.addMarker(MarkerOptions().position(coordinates_Lviv).title("My Position"))
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates_Lviv, 8F))
+            val coordinatesOfLviv = LatLng(49.842957, 24.031111)
+            map.addMarker(MarkerOptions().position(coordinatesOfLviv).title("My Position"))
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinatesOfLviv, 8F))
             CoroutineScope(Dispatchers.IO).launch {
                 val result = client.create(ApiInterface::class.java).getSimpleRoute()
                 if (result.isSuccessful){
