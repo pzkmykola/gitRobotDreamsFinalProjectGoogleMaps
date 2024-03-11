@@ -1,4 +1,4 @@
 package com.example.googlemapsfinprojongit
 
-class SupportMapFragment {
-}
+//class SupportMapFragment {
+//}
