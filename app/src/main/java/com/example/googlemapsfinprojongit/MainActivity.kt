@@ -7,14 +7,8 @@ import android.widget.Toast
 import com.example.googlemapsfinprojongit.Client.client
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.maps.android.PolyUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,7 +26,7 @@ class MainActivity : AppCompatActivity(), OnAuthLaunch, OnAddClickListener {
 
     override fun showListFragment() {
         supportFragmentManager.beginTransaction()
-            .add(com.google.android.material.R.id.container, HomeListFragment())
+            .replace(com.google.android.material.R.id.container, HomeListFragment())
             .commit()
     }
 

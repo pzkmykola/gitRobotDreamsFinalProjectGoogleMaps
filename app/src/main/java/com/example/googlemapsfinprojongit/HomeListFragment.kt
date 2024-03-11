@@ -1,5 +1,6 @@
 package com.example.googlemapsfinprojongit
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -34,6 +36,7 @@ class HomeListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
+        val fabRunMap = view.findViewById<FloatingActionButton>(R.id.fabMap)
         list = view.findViewById(R.id.clientList)
         account = GoogleSignIn.getLastSignedInAccount(requireContext())
         target  =  database.reference
@@ -61,5 +64,14 @@ class HomeListFragment: Fragment() {
             override fun onCancelled(error: DatabaseError) {
             }
         })
+
+        fabRunMap.setOnClickListener {
+            val intent = Intent(context, MapsActivity::class.java)
+            startActivity(intent)
+            parentFragmentManager.beginTransaction()
+                .add(com.google.android.material.R.id.container, SupportMapFragment())
+                .addToBackStack("mapFragment")
+                .commit()
+        }
     }
 }
