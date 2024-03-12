@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.googlemapsfinprojongit.dbmap.PlaceFB
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -43,12 +44,18 @@ class HomeListFragment: Fragment() {
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
         val fabRunMap = view.findViewById<FloatingActionButton>(R.id.fabMap)
         listView = view.findViewById(R.id.list)
+        listView.layoutManager = LinearLayoutManager(requireContext())
+        adapter = PlaceListAdapter()
+        listView.adapter = adapter
 //        account = GoogleSignIn.getLastSignedInAccount(requireContext())
 //        target  =  database.reference
 //            .child(account?.id ?: "unknown_account").child("Places")
         fab.setOnClickListener {
             val activity = requireActivity() as OnAddClickListener
             activity.onFabClick()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.container, AddPlaceFragment())
+                .commit()
         }
 
         target.addValueEventListener(object : ValueEventListener {

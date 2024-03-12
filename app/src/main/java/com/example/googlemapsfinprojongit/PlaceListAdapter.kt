@@ -13,10 +13,10 @@ class PlaceListAdapter (var items:List<PlaceFB> = emptyList()): RecyclerView.Ada
         val view =  ListItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent, false)
         return PlaceViewHolder(view)
     }
-//    fun updateItems(itemsToUpdate:List<PlaceFB>){
-//        items = itemsToUpdate
-//        notifyDataSetChanged()
-//    }
+    fun updateItems(itemsToUpdate:List<PlaceFB>){
+        items = itemsToUpdate
+        notifyDataSetChanged()
+    }
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
