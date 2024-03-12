@@ -4,15 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.googlemapsfinprojongit.Client.client
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 //, OnAuthLaunch, OnAddClickListener
 class MainActivity : AppCompatActivity(), OnAuthLaunch, OnAddClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +50,7 @@ class MainActivity : AppCompatActivity(), OnAuthLaunch, OnAddClickListener {
 
     override fun onFabClick() {
         supportFragmentManager.beginTransaction()
-            .add(com.google.android.material.R.id.container, AddClientFragment())
+            .add(com.google.android.material.R.id.container, AddPlaceFragment())
             .addToBackStack("clientFragment")
             .commit()
     }

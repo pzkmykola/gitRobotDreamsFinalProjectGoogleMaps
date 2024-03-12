@@ -44,6 +44,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val coordinatesOfLviv = LatLng(49.842957, 24.031111)
         mMap.addMarker(MarkerOptions().position(coordinatesOfLviv).title("Marker in Lviv"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinatesOfLviv))
+
         binding.fabBack.setOnClickListener {
                 supportFragmentManager.beginTransaction()
                 .replace(com.google.android.material.R.id.container, HomeListFragment())

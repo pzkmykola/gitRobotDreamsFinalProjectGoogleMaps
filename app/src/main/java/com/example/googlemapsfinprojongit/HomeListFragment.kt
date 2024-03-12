@@ -2,12 +2,14 @@ package com.example.googlemapsfinprojongit
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.example.googlemapsfinprojongit.dbmap.PlaceFB
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.maps.SupportMapFragment
@@ -19,12 +21,15 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class HomeListFragment: Fragment() {
-    private var list: ListView? = null
+    private lateinit var listView: RecyclerView
+    private lateinit var adapter: PlaceListAdapter
+    private lateinit var viewModel: PlaceViewModel
     private var account: GoogleSignInAccount? = null
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance(
         "https://mapsfinprojongit-default-rtdb.europe-west1.firebasedatabase.app/"
     )
-    private var target: DatabaseReference? = null
+    //private var target: DatabaseReference? = null
+    private val target = MyApplication.getApp().target
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,28 +42,34 @@ class HomeListFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
         val fabRunMap = view.findViewById<FloatingActionButton>(R.id.fabMap)
-        list = view.findViewById(R.id.clientList)
-        account = GoogleSignIn.getLastSignedInAccount(requireContext())
-        target  =  database.reference
-            .child(account?.id ?: "unknown_account").child("clients")
+        listView = view.findViewById(R.id.list)
+//        account = GoogleSignIn.getLastSignedInAccount(requireContext())
+//        target  =  database.reference
+//            .child(account?.id ?: "unknown_account").child("Places")
         fab.setOnClickListener {
             val activity = requireActivity() as OnAddClickListener
             activity.onFabClick()
         }
 
-        target?.addValueEventListener(object : ValueEventListener {
+        target.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val clientList = mutableListOf<String>()
+                val placeList = mutableListOf<PlaceFB>()
                 if (snapshot.exists()) {
                     snapshot.children.forEach {
-                        val employee = it?.getValue(String::class.java) ?: ""
-                        clientList.add(employee)
+                        val taskKey: String = it.key!!
+                        if (taskKey != "") {
+                            val newItem = it.getValue(PlaceFB::class.java)
+                            if (newItem != null && taskKey == newItem.id) {
+                                Log.d(
+                                    "MYRES1",
+                                    "${newItem.id}/${newItem.title}/${newItem.location}/${newItem.urlImage}"
+                                )
+                                placeList.add(newItem)
+                            }
+                        }
                     }
-                    val adapter = ArrayAdapter(
-                        requireActivity(),
-                        android.R.layout.simple_list_item_1, clientList
-                    )
-                    list?.adapter = adapter
+                    adapter = PlaceListAdapter(placeList)
+                    listView.adapter = adapter
                 }
             }
             override fun onCancelled(error: DatabaseError) {
