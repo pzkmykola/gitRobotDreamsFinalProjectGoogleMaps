@@ -46,6 +46,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    //implementation("androidx.recyclerview:recyclerview:1.3.2")
 
     //firebase
     implementation (platform("com.google.firebase:firebase-bom:32.7.3"))
@@ -63,7 +64,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.okhttp3:okhttp:4.11.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
+
     implementation("androidx.room:room-ktx:2.6.1")
     //glide
     implementation("com.github.bumptech.glide:glide:4.15.1")

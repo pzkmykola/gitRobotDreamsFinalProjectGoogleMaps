@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,11 +26,6 @@ class HomeListFragment: Fragment() {
     private lateinit var listView: RecyclerView
     private lateinit var adapter: PlaceListAdapter
     private lateinit var viewModel: PlaceViewModel
-    private var account: GoogleSignInAccount? = null
-    private val database: FirebaseDatabase = FirebaseDatabase.getInstance(
-        "https://mapsfinprojongit-default-rtdb.europe-west1.firebasedatabase.app/"
-    )
-    //private var target: DatabaseReference? = null
     private val target = MyApplication.getApp().target
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,13 +39,12 @@ class HomeListFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
         val fabRunMap = view.findViewById<FloatingActionButton>(R.id.fabMap)
+        viewModel = ViewModelProvider(this@HomeListFragment)[PlaceViewModel::class.java]
         listView = view.findViewById(R.id.list)
         listView.layoutManager = LinearLayoutManager(requireContext())
         adapter = PlaceListAdapter()
         listView.adapter = adapter
-//        account = GoogleSignIn.getLastSignedInAccount(requireContext())
-//        target  =  database.reference
-//            .child(account?.id ?: "unknown_account").child("Places")
+
         fab.setOnClickListener {
             val activity = requireActivity() as OnAddClickListener
             activity.onFabClick()
@@ -82,6 +77,26 @@ class HomeListFragment: Fragment() {
             override fun onCancelled(error: DatabaseError) {
             }
         })
+
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
+            override fun getMovementFlags(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ): Int = makeMovementFlags(0, ItemTouchHelper.END)
+
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean = false
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                if (direction == ItemTouchHelper.END) {
+                    viewModel.remove(adapter.items[viewHolder.adapterPosition])
+                }
+            }
+        })
+        itemTouchHelper.attachToRecyclerView(listView)
 
         fabRunMap.setOnClickListener {
             val intent = Intent(context, MapsActivity::class.java)
